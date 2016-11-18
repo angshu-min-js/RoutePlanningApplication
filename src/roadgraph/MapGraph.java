@@ -274,6 +274,7 @@ public class MapGraph {
 		return null;
 	}
 
+	
 	/** Find the path from start to goal using A-Star search
 	 * 
 	 * @param start The starting location
