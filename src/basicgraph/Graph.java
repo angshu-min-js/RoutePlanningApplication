@@ -2,6 +2,7 @@ package basicgraph;
 
 import java.util.ArrayList;
 import java.util.Collections;
+import java.util.Comparator;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
@@ -122,7 +123,16 @@ public abstract class Graph {
 	 */
 	public List<Integer> degreeSequence() {
 		// XXX: Implement in part 1 of week 2
-		return null;
+		List<Integer> degreeSequence = new ArrayList<>();
+		for(int i=0;i < numVertices; i++)
+			degreeSequence.add(getInNeighbors(i).size()+getNeighbors(i).size());
+		
+		Collections.sort(degreeSequence, new Comparator<Integer>() {
+			@Override
+			public int compare(Integer Obj1, Integer Obj2)
+			{ return Obj2.compareTo(Obj1); }			
+		});
+		return degreeSequence;
 	}
 	
 	/**
