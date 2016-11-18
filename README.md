@@ -19,5 +19,7 @@
 The application uses street data to identify the shortest path between two intersections via different graph search algorithms.
 
 - Implementing basic graphs for real transportation data
+- Class Design and Graph Search
+
 
 
