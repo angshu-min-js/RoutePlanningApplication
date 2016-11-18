@@ -74,6 +74,11 @@ class MapEdge
 	   return end;
 	}
 	
+	MapNode getStartNode() {
+		   return start;
+		}
+		
+	
 	/**
 	 * Return the location of the start point
 	 * @return The location of the start point as a GeographicPoint

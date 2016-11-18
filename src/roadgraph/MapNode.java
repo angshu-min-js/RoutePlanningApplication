@@ -4,13 +4,17 @@ import java.util.Set;
 
 import geography.GeographicPoint;
 
-class MapNode
+class MapNode implements Comparable
 {
 	/** The list of edges out of this node */
 	private HashSet<MapEdge> edges;
 		
 	/** the latitude and longitude of this node */
 	private GeographicPoint location;
+	
+	// Scores for priority queue
+	private double actualScore;
+	private double score;
 		
 	/** 
 	 * Create a new MapNode at a given Geographic location
@@ -20,6 +24,8 @@ class MapNode
 	{
 		location = loc;
 		edges = new HashSet<MapEdge>();
+		actualScore = 0;
+		score = 0;
 	}
 		
 	/**
@@ -42,6 +48,37 @@ class MapNode
 			neighbors.add(edge.getOtherNode(this));
 		}
 		return neighbors;
+	}
+	
+	/**  
+	 * Getter and Setter of  Scores and Actual Scores
+	 * @return scores
+	 */
+	// Get the score from the Node to the start Node.
+	public double getActualScore() {
+		return actualScore; // for A*
+	}
+	
+	// Get the estimated score from the Node to the goal Node.
+	public double getScore() {
+		return score;
+	}
+	
+	// Set the score from the Node to the start Node.
+	public void setActualScore(double score) {
+		actualScore = score; // for A*
+	}
+	
+	// Set the estimated score from the Node to the goal Node.
+	public void setScore(double score) {
+		this.score = score;
+	}
+	
+	//Queue will need to implement the interface Comparable
+	@Override
+	public int compareTo(Object o) {
+		MapNode node = (MapNode)o;
+		return ((Double)this.getScore()).compareTo((Double)node.getScore());
 	}
 	
 	/**
@@ -103,7 +140,7 @@ class MapNode
 		toReturn += "]";
 		return toReturn;
 	}
-
+	
 	// For debugging, output roadNames as a String.
 	public String roadNamesAsString()
 	{
@@ -113,6 +150,10 @@ class MapNode
 		}
 		toReturn += ")";
 		return toReturn;
+	}
+	
+	public double getDistanceTo(MapNode goalNode) {
+		return getLocation().distance(goalNode.getLocation());
 	}
 
 }
